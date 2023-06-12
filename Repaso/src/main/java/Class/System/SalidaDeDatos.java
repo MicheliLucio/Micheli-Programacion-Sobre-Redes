@@ -32,9 +32,11 @@ public class SalidaDeDatos {
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
-				
+			
+			/*ERRORES*/
 			Logger.getLogger(main.class.getName()).log(Level.SEVERE, "Error critico en el sistema.");
-				
+			
+			/*ESCRIBIR EN CONSOLA*/
 			PrintStream ps = new PrintStream( System.out ); //Optimiza el flujo de datos de salida
 			ps.println("hola uwu");
 				

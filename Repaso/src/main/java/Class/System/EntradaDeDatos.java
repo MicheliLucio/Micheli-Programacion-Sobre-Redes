@@ -10,20 +10,20 @@ import java.util.logging.Logger;
 
 public class EntradaDeDatos {
 	public EntradaDeDatos() {
-		PrintStream ps = new PrintStream(System.out);
 		
+	}
+	public String Leer() {
+		int Byte = 0;
+		String cadena="";
 		try {
-			ps.print("Entrada: ");
-			int Byte = 0;
-			String cadena = "";
-			while((Byte = System.in.read()) != '\n' ) {
-				cadena += (char)Byte;
+			while ( ( Byte = System.in.read() ) != '\n' ){
+					if ( Byte != '\r' )
+						cadena += (char)Byte;
 			}
-			ps.println(cadena);
-			//ps.println( (char)System.in.read());
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-		
+
+		return cadena;
 	}
 }
