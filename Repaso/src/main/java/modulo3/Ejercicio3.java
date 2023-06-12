@@ -164,10 +164,10 @@ public class Ejercicio3 {
 				String linea = "";
 
 				while((linea = br.readLine()) != null) {
-					if(linea == String.valueOf(0) || linea == String.valueOf(1)) {
+					if(linea == String.valueOf('0') || linea == String.valueOf('1')) {
 						texto += "";
 					}
-					else if(linea == String.valueOf(2)) {
+					else if(linea == String.valueOf('2')) {
 						texto += linea + "\n";
 					}else {
 						for(int i = 1; i <= Integer.parseInt(linea); i++) {
@@ -182,31 +182,31 @@ public class Ejercicio3 {
 						}
 					}
 				}
-br.close();
-fr.close();
-}catch(FileNotFoundException e) {
-e.printStackTrace();
-}catch(IOException e) {
-e.printStackTrace();
-}
-try {
-fw = new FileWriter(archivo);
-}catch (IOException e) {
-e.printStackTrace();
-}
-PrintWriter pw = new PrintWriter(fw);
-pw.print(texto);
-try {
-fw.flush();
-pw.close();
-fw.close();
-} catch (IOException e) {
-e.printStackTrace();
-}
-ps.println("Primos.dat: ");
-ps.println(LeerArchivoBuffered(archivo));
-}
-}
+				br.close();
+				fr.close();
+			}catch(FileNotFoundException e) {
+				e.printStackTrace();
+			}catch(IOException e) {
+				e.printStackTrace();
+			}
+			try {
+				fw = new FileWriter(archivo);
+			}catch (IOException e) {
+				e.printStackTrace();
+			}
+			PrintWriter pw = new PrintWriter(fw);
+			pw.print(texto);
+			try {
+				fw.flush();
+				pw.close();
+				fw.close();
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+			ps.println("Primos.dat: ");
+			ps.println(LeerArchivoBuffered(archivo));
+		}
+	}
 
 	public void EjercicioG() {
 		archivo = new File("..\\catacteres.dat");

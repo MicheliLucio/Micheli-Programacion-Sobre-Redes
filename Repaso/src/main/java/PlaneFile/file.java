@@ -79,10 +79,10 @@ public class file {
 		}
 	}
 	
-	public void LeerArchivoBuffered() {
+	public String LeerArchivoBuffered(File a) {
 		String texto = "";
 		try {
-			FileReader fr = new FileReader(error);
+			FileReader fr = new FileReader(a);
 			BufferedReader br = new BufferedReader(fr);
 			
 			String linea = "";
@@ -90,12 +90,13 @@ public class file {
 			while((linea = br.readLine()) != null) {
 				texto += "\n" + linea;
 			}
+			br.close();
 		}catch(FileNotFoundException e) {
 			e.printStackTrace();
 		}catch(IOException e) {
 			e.printStackTrace();
 		}
 		
-		
+		return texto;
 	}
 }
