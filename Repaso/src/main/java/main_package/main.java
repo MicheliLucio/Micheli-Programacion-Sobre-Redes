@@ -9,7 +9,6 @@ public class main {
 	static Ejercicio1 e1 = new Ejercicio1();
 	static Ejercicio3 e3 = new Ejercicio3();
 	public static void main(String[] args) {
-		e1.EjercicioB();
+		e1.EjercicioG();
 	}
-
 }
