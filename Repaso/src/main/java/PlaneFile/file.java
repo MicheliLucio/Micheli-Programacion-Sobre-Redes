@@ -7,8 +7,7 @@ import java.io.FileNotFoundException;
 import java.io.PrintStream;
 import java.io.PrintWriter;  
 import java.io.FileWriter;
-import java.io.BufferedWriter; 
-import java.io.Reader;
+import java.io.BufferedWriter;
 import java.io.FileReader;
 import java.io.BufferedReader;
 
