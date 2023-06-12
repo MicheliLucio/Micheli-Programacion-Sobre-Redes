@@ -1,47 +1,27 @@
 package Readers;
 
 import java.io.IOException;
-import java.io.InputStreamReader;
-import java.io.PrintStream;
 import java.io.Reader;
-import java.io.BufferedReader;
+import java.io.InputStreamReader;
 
 public class ReaderClass {
+	static Reader lector;
+
 	public ReaderClass() {
-		
-		PrintStream ps = new PrintStream(System.out);
-		
-		PrintStream err = new PrintStream(System.err);
-		err.println();
-		
-		
-		Reader lector = new InputStreamReader(System.in);
-		InputStreamReader objeto = new InputStreamReader(System.in);
-		BufferedReader br = new BufferedReader(objeto);
-		try {
-			ps.println("Esto se lee con un buffer: ");
-			ps.println(br.readLine());
-		}
-		catch(IOException e) {
-			e.printStackTrace();
-		}
-		
-		
-		
+		lector = new InputStreamReader(System.in);
 	}
-	
-	public static String leer() {
+
+	public String Leer() {
 		int Byte = 0;
-		String cadena = "";
+		String cadena="";
 		try {
-			while((Byte = System.in.read()) != '\n') {
-				if(Byte != '\r');
-				cadena += (char)Byte;
+			while ( ( Byte = lector.read() ) != '\n' ){
+				if ( Byte != '\r' )
+					cadena += (char)Byte;
 			}
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-		
 		return cadena;
 	}
 }
