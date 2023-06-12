@@ -1,4 +1,4 @@
-package modulo3;
+package GuiaEjercicios;
 import Readers.ReaderClass;
 import java.io.PrintStream;
 import java.io.File;
