@@ -10,8 +10,7 @@ public class Send {
 
 	//udp
 	//MultiCast
-	public static void main()
-	{
+	public static void main(String[] args){
 		try {
 			int port = 5050;
 			//Rango del MultiCast

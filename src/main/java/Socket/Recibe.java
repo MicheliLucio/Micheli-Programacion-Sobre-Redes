@@ -18,6 +18,7 @@ public class Recibe {
 		InetAddress IPaddress;
 		
 		try {
+			socket = new MulticastSocket(port);
 			IPaddress = InetAddress.getByName(IP);
 			socket.joinGroup(IPaddress);
 			ps.println( "Esperando conexion multicast:"
@@ -26,8 +27,11 @@ public class Recibe {
 			DatagramPacket packet = new DatagramPacket(new byte[1024],1024);
 			socket.receive(packet);
 			
-			packet.getData();
-		
+			String msg = new String(packet.getData(), packet.getOffset(), packet.getLength());
+			ps.println(("[Multicast Recibido] -").concat(msg));
+			
+			socket.leaveGroup(IPaddress);
+			socket.close();
 		} catch (UnknownHostException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
