@@ -1,7 +1,11 @@
 package Socket;
+
+import java.io.IOException;
+import java.io.PrintStream;
+import java.net.DatagramPacket;
 import java.net.InetAddress;
 import java.net.MulticastSocket;
-
+import java.net.UnknownHostException;
 
 public class Recibe {
 	public static void main(String[] args) {
@@ -16,6 +20,14 @@ public class Recibe {
 		try {
 			IPaddress = InetAddress.getByName(IP);
 			socket.joinGroup(IPaddress);
+			ps.println( "Esperando conexion multicast:"
+					+ socket.getLocalSocketAddress() 
+			);
+			DatagramPacket packet = new DatagramPacket(new byte[1024],1024);
+			socket.receive(packet);
+			
+			packet.getData();
+		
 		} catch (UnknownHostException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -23,10 +35,10 @@ public class Recibe {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		ps.println( "Esperando conexion multicast:"
-				+ socket.getLocalSocketAddress() 
-		);
+
 		
+		
+
 		
 		
 		
