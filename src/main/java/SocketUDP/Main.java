@@ -1,4 +1,4 @@
-package Socket;
+package SocketUDP;
 
 public class Main {
 
