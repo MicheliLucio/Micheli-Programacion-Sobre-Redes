@@ -22,8 +22,8 @@ public class servidor extends conexion {
 			sock = servSock.accept();
 			
 			ps.println("IP: "+sock.getInetAddress().getHostAddress() +
-					   "Nombre: " +sock.getInetAddress().getHostName()+
-					   "Port: "+ sock.getPort() + "\n"
+					   "\nNombre: " +sock.getInetAddress().getHostName()+
+					   "\nPort: "+ sock.getPort() + "\n"
 					  );
 			dosSer = new DataOutputStream(sock.getOutputStream());
 			isrServ = new InputStreamReader(sock.getInputStream());
@@ -38,7 +38,7 @@ public class servidor extends conexion {
 				//aca recibi un mensaje seguro
 				ps.println( msg );
 				
-				dosSer.writeUTF("Recibí la info pa.");
+				dosSer.writeUTF("Quiero!");
 				dosSer.flush();
 			}
 		} catch (IOException e) {
@@ -48,7 +48,9 @@ public class servidor extends conexion {
 			
 			try {
 				sock.close();
+				if(read !=null)
 				read.close();
+				if(isrServ != null)
 				isrServ.close();
 				dosSer.close();
 				servSock.close();
