@@ -23,40 +23,32 @@ public class servidor extends conexion {
 							+ "\nPort: " + sock.getPort() + "\nPort Local: " + sock.getLocalPort() + "\n");
 
 			dosSer = new DataOutputStream(sock.getOutputStream());
-			disSer = new DataInputStream(sock.getInputStream());
+			disSer = new DataInputStream( sock.getInputStream());
 
 			ps.println("Cliente conectado con exito :) !!!");
-
-			ps.println("Esperando mensaje del cliente ...");
+			ps.println("Esperando mensaje del cliente ..." );
 
 			// congela programa (thread)
 			while (true) {
 				msg = disSer.readUTF();
 				if(msg.equals("/exit"))
 				{
-					ps.println("CLIENTE DESCONECTADO");
+					ps.println("cliente desconectado");
 					break;
 				}
-				ps.println("--" + disSer.readUTF());
+					
+				ps.println("--" + msg);
 				dosSer.writeUTF("el envido esta primero");
 				dosSer.writeUTF("REEE TRUCO");
 				dosSer.flush();
 			}
-			/*
-			 * while( (msg = read.readLine()) != null ) { //aca recibi un mensaje seguro
-			 * ps.println( "mensaje recibido: " + msg );
-			 * 
-			 * dosSer.writeUTF("quiero !"); dosSer.flush(); }
-			 */
-			
+
 		} catch (IOException e) {
 			e.printStackTrace();
 		} finally {
 			try {
 				sock.close();
-
 				
-
 				if (disSer != null)
 					disSer.close();
 

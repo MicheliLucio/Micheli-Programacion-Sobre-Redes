@@ -8,65 +8,62 @@ import java.io.InputStreamReader;
 
 import SocketTCP.conexion;
 
-public class Cliente extends conexion{
-	
+public class Cliente extends conexion {
+
 	DataInputStream disCli = null;
 	InputStreamReader isr = null;
 	BufferedReader br = null;
 	
-
 	public Cliente() {
-		super("cliente");
-
+		super("Cliente");
 	}
+
 	public void clienteOn() {
 		try {
-			
-		
-			ps.println("IP: " + sock.getInetAddress().getHostAddress() + 
-					"\nNombre: " + sock.getInetAddress().getHostName() + 
-					"\nPort: " + sock.getPort()  + 
-					"\nPort Local: " + sock.getLocalPort() +
-					"\n"
-					);
+
+			ps.println(
+					"IP: " + sock.getInetAddress().getHostAddress() + "\nNombre: " + sock.getInetAddress().getHostName()
+							+ "\nPort: " + sock.getPort() + "\nPort Local: " + sock.getLocalPort() + "\n");
+
 			dosCli = new DataOutputStream(sock.getOutputStream());
 			disCli = new DataInputStream(sock.getInputStream());
-			
+
 			isr = new InputStreamReader(System.in);
 			br = new BufferedReader(isr);
 			
-			boolean ON = true ;
-			while(ON) {
-				ps.println("Escriba su mensaje: ");
-				ps.println("\t->");
-				while((msg = br.readLine()) != null){
+			boolean ON = true;
+			while ( ON ) {
+				ps.print("Escriba su mensaje:");
+				ps.print("\t->");
+				while ((msg = br.readLine()) != null) {			
+					ps.print("\t->");
 					dosCli.writeUTF(msg);
 					dosCli.flush();
-					if(msg.equals("/exit"))
+					if( msg.equals("/exit"))
 					{
 						ON = false;
-						break;	
+						break;
 					}
 				}
 			}
-			Thread.sleep(200);
+			
+			Thread.sleep( 200 );
 			ps.println("\nCLIENTE DESCONECTADO");
-		}catch(IOException e) {
-				e.printStackTrace();
-		}catch(InterruptedException e){
+		} catch (IOException e) {
 			e.printStackTrace();
-		}finally {
+		} catch (InterruptedException e) {
+			e.printStackTrace();
+		} finally {
 			try {
 				br.close();
 				isr.close();
 				dosCli.close();
 				disCli.close();
 				sock.close();
-			}catch(IOException e) {
+			} catch (IOException e) {
 				e.printStackTrace();
-				
 			}
 		}
-		}
-}
+	}
 
+}
