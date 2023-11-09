@@ -1,0 +1,10 @@
+
+.classpath
+.project
+.settings/org.eclipse.jdt.apt.core.prefs
+.settings/org.eclipse.jdt.core.prefs
+.settings/org.eclipse.m2e.core.prefs
+target/classes/META-INF/MANIFEST.MF
+target/classes/META-INF/maven/ar.edu.et32/ProgramacionSobreRedes/pom.properties
+target/classes/META-INF/maven/ar.edu.et32/ProgramacionSobreRedes/pom.xml
+.factorypath
