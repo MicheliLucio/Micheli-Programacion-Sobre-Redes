@@ -3,10 +3,13 @@ package Proyecto;
 import java.io.DataInputStream;
 import java.io.DataOutputStream;
 import java.io.IOException;
+import Utiles.readerClass;
+import Threads.ThreadEscuchaServidor;
 
 public class Servidor extends conexion {
-
 	DataInputStream disSer = null;
+	readerClass rSer = null;
+	ThreadEscuchaServidor hiloSer = new ThreadEscuchaServidor();
 	
 	public Servidor() {
 		super("servidor");
@@ -31,19 +34,7 @@ public class Servidor extends conexion {
 			ps.println("Esperando mensaje del cliente ..." );
 
 			// crear otro thread para esto
-			while (true) {
-				msg = disSer.readUTF();
-				if(msg.equals("/exit"))
-				{
-					ps.println("cliente desconectado");
-					break;
-				}
-					
-				ps.println("--" + msg);
-				dosSer.writeUTF("el envido esta primero");
-				dosSer.writeUTF("REEE TRUCO");
-				dosSer.flush();
-			}
+			hiloSer.run(disSer,dosSer);
 
 		} catch (IOException e) {
 			e.printStackTrace();

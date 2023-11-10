@@ -2,15 +2,16 @@ package Proyecto;
 
 
 import java.io.DataInputStream;
-import Utiles.readerClass;
 import java.io.DataOutputStream;
 import java.io.IOException;
-
+import Threads.ThreadEscuchaCliente;
+import Threads.ThreadEnvíoCliente;
 
 public class Cliente extends conexion{
 
 	DataInputStream disCli = null;
-	readerClass lector = new readerClass();
+	ThreadEscuchaCliente escucha = new ThreadEscuchaCliente();
+	ThreadEnvíoCliente envio = new ThreadEnvíoCliente();
 	
 	public Cliente() {
 		super("cliente");
@@ -26,21 +27,16 @@ public class Cliente extends conexion{
 					"\nPort Local: " + sock.getLocalPort() +
 					"\n"
 					);
-
+			
+			
+			
 			dosCli = new DataOutputStream(sock.getOutputStream());
 			disCli = new DataInputStream(sock.getInputStream());
-
-			ps.println("enviando mensaje");
-			dosCli.writeUTF(lector.leer());
-			dosCli.flush();
 			
-			//crear un thread para esto
-			while (true) {
-				msg = disCli.readUTF();
-				ps.println("--" + msg);
-				if(msg.equals("REEE TRUCO"))
-					ps.println("\tnos canto retrucooo x.x");
-			}
+			
+			envio.run(dosCli, disCli); 
+			escucha.run(disCli);
+			
 
 		} catch (IOException e) {
 			e.printStackTrace();
