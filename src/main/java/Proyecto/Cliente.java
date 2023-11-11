@@ -1,56 +1,58 @@
 package Proyecto;
 
-
-import java.io.DataInputStream;
-import java.io.DataOutputStream;
+import java.io.BufferedReader;
 import java.io.IOException;
+import java.io.InputStreamReader;
+import java.io.PrintStream;
+import java.net.Socket;
 import Threads.ThreadEscuchaCliente;
-import Threads.ThreadEnvíoCliente;
+import Utiles.Desconectar;
+import Utiles.EscribirYColores;
 
-public class Cliente extends conexion{
 
-	DataInputStream disCli = null;
-	ThreadEscuchaCliente escucha = new ThreadEscuchaCliente();
-	ThreadEnvíoCliente envio = new ThreadEnvíoCliente();
-	
-	public Cliente() {
-		super("cliente");
-		// TODO Auto-generated constructor stub
-	}
+public class Cliente extends Thread{
+	 private Socket Cliente;
+	 private ThreadEscuchaCliente hiloEscucha;
+	 private InputStreamReader isr;
+	 private BufferedReader Reader;
+	 private PrintStream ps;
+	 private String Direccion = "127.0.0.1";
+	 private int Port = 5050;
+	 private EscribirYColores EYC;
+	 private boolean Desconexion;
+	 private Desconectar Desconectar;
+	 
 
-	public void clienteOn() {
-		try {
-
-			ps.println("IP: " + sock.getInetAddress().getHostAddress() + 
-					"\nNombre: " + sock.getInetAddress().getHostName() + 
-					"\nPort: " + sock.getPort()  + 
-					"\nPort Local: " + sock.getLocalPort() +
-					"\n"
-					);
+	 public Cliente() {
 			
-			
-			
-			dosCli = new DataOutputStream(sock.getOutputStream());
-			disCli = new DataInputStream(sock.getInputStream());
-			
-			
-			envio.run(dosCli, disCli); 
-			escucha.run(disCli);
-			
-
-		} catch (IOException e) {
-			e.printStackTrace();
-		} finally {
-			try {
-				sock.close();
-				disCli.close();
-				dosSer.close();
-				servSock.close();
-			} catch (IOException e) {
-				e.printStackTrace();
-			}
 		}
-
-	}
-
+	 public void ClienteOn() {
+			run();
+		}
+	 public void run() {
+		 try {
+			Cliente = new Socket(Direccion, Port);
+			isr = new InputStreamReader(Cliente.getInputStream());
+			Reader = new BufferedReader(isr);
+			ps = new PrintStream(Cliente.getOutputStream());
+			EYC = new EscribirYColores();
+			Desconectar = new Desconectar(Desconexion, Reader, ps, Cliente);
+			hiloEscucha = new ThreadEscuchaCliente(Reader, Desconexion, Desconectar);
+			
+			hiloEscucha.start();
+			
+			
+			String mensaje;
+			
+			while((mensaje = Reader.readLine()) != null) {
+				EYC.mensaje(mensaje);
+			}
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		 
+	 }
 }
+
+	
