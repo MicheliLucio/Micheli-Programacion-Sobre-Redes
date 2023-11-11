@@ -5,24 +5,20 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.PrintStream;
 import java.net.Socket;
-import Threads.ThreadEscuchaCliente;
-import Utiles.Desconectar;
 import Utiles.EscribirYColores;
+
 
 
 public class Cliente extends Thread{
 	 private Socket Cliente;
-	 private ThreadEscuchaCliente hiloEscucha;
-	 private InputStreamReader isr;
 	 private BufferedReader Reader;
+	 private InputStreamReader isr;
 	 private PrintStream ps;
+	 private boolean Desconexion;
 	 private String Direccion = "127.0.0.1";
 	 private int Port = 5050;
 	 private EscribirYColores EYC;
-	 private boolean Desconexion;
-	 private Desconectar Desconectar;
 	 
-
 	 public Cliente() {
 			
 		}
@@ -36,11 +32,29 @@ public class Cliente extends Thread{
 			Reader = new BufferedReader(isr);
 			ps = new PrintStream(Cliente.getOutputStream());
 			EYC = new EscribirYColores();
-			Desconectar = new Desconectar(Desconexion, Reader, ps, Cliente);
-			hiloEscucha = new ThreadEscuchaCliente(Reader, Desconexion, Desconectar);
 			
+			Thread hiloEscucha = new Thread( new Runnable() {
+				public void run() {
+					while(!Desconexion)
+					{
+						try {
+			                BufferedReader Reader = new BufferedReader(new InputStreamReader(System.in));
+			                while (!Desconexion) {                    
+			                    String mensaje = Reader.readLine();
+			                    if (mensaje.equals("/salir")) {
+			                    	Reader.close();
+			                    	CerrarConexion();
+			                    }else{
+			                    	ps.println(mensaje);
+			                    }
+			                }
+			            } catch (IOException e) {
+			            	CerrarConexion();
+			            }
+					}
+				}
+			});
 			hiloEscucha.start();
-			
 			
 			String mensaje;
 			
@@ -53,6 +67,18 @@ public class Cliente extends Thread{
 		}
 		 
 	 }
+	 public void CerrarConexion() {
+			Desconexion = true;
+	        try {
+	        	Reader.close();
+	        	ps.close();
+	            if (!Cliente.isClosed()) {
+	                Cliente.close();
+	            }
+	        } catch (IOException e) {
+	            e.printStackTrace();
+	        }
+		}
 }
 
 	
