@@ -6,6 +6,7 @@ public class MainServidor {
 		// TODO Auto-generated method stub
 		Servidor s = new Servidor();
 		
+		s.ServerOn();
 	}
 
 }
