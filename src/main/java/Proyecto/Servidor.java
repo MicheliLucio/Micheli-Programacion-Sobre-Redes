@@ -90,7 +90,7 @@ public class Servidor{
 								ps.println(EscribirYColores.ANSI_PURPLE + "Ingresa un nickname: " + EscribirYColores.ANSI_RESET);
 								Nickname = Reader.readLine();
 								EYC.mensaje(EYC.ANSI_BLUE + Nickname + EYC.ANSI_GREEN + "Se conecto al servidor" + EYC.ANSI_RESET);
-								Broadcast(EYC.ANSI_GREEN + Nickname + " Se unió al chat" + EYC.ANSI_RESET);
+								Broadcast(EYC.ANSI_GREEN + Nickname + " se unió al chat" + "\n" + EYC.ANSI_RESET);
 								String msg;
 								while ((msg = Reader.readLine()) != null) {
 				                    if (msg.startsWith("/nick ")) {
@@ -99,15 +99,15 @@ public class Servidor{
 				                        	Broadcast(EYC.ANSI_GREEN + Nickname + " cambió su nick a "+ partir[1] + EYC.ANSI_RESET);
 				                            EYC.mensaje(EYC.ANSI_PURPLE + Nickname + EYC.ANSI_GREEN +" cambió su nombre a " + EYC.ANSI_YELLOW + partir[1] + EYC.ANSI_RESET);
 				                            Nickname = partir[1];
-				                            ps.println(EYC.ANSI_YELLOW + "Ahora te llamás: "+Nickname+ EYC.ANSI_RESET);
+				                            ps.println(EYC.ANSI_YELLOW + "Ahora te llamás "+Nickname+ EYC.ANSI_RESET);
 				                        }else{
-				                        	ps.println(EYC.ANSI_RED+"No se cambió tu nombre de usuario. "+ EYC.ANSI_RESET);
+				                        	ps.println(EYC.ANSI_RED+ "No se cambió tu nombre de usuario. "+ EYC.ANSI_RESET);
 				                        }
 				                    }else if(msg.startsWith("/quit")){
 				                    	Broadcast(EYC.ANSI_YELLOW + Nickname + "se ha desconectado" + EYC.ANSI_RESET);
 				                    	CerrarConexion();
 				                    }else{
-				                    	Broadcast(ColorUsuario + Nickname + ": "+ msg+ EYC.ANSI_RESET);
+				                    	Broadcast(ColorUsuario + Nickname + ": "+ "\n" + msg+ EYC.ANSI_RESET);
 				                    }
 				                }
 							}catch(IOException e) {
