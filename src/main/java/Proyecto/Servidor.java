@@ -13,16 +13,21 @@ import Utiles.EscribirYColores;
 public class Servidor{
 	private ArrayList<Conexion> Conexiones;
 	private ServerSocket Servidor;
+	private PrintStream ps;
+	private EscribirYColores EYC;
 	private boolean DesconexionServidor;
 	protected int port = 5050;
 
 	public Servidor() {
 		Conexiones = new ArrayList<Conexion>();
 		DesconexionServidor = false;
+		ps = new PrintStream(System.out);
+		EYC = new EscribirYColores();
 	}
 
 	public void ServerOn() {
 		hiloServidor.start();
+		ps.println(EYC.ANSI_RED+"ESPERANDO A EL / LOS CLIENTES: ");
 	}
 	
 	Thread hiloServidor = new Thread(
@@ -107,7 +112,7 @@ public class Servidor{
 				                    	Broadcast(EYC.ANSI_YELLOW + Nickname + "se ha desconectado" + EYC.ANSI_RESET);
 				                    	CerrarConexion();
 				                    }else{
-				                    	Broadcast(ColorUsuario + Nickname + ": "+ "\n" + msg+ EYC.ANSI_RESET);
+				                    	Broadcast(ColorUsuario + Nickname + ": "+ "\n" + "> " +msg+ EYC.ANSI_RESET);
 				                    }
 				                }
 							}catch(IOException e) {
