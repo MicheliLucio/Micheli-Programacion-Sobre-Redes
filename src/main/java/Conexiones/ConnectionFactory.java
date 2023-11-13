@@ -44,7 +44,7 @@ public class ConnectionFactory {
 class MySQL{
 	private String driver = "com.mysql.cj.jdbc.Driver";
 	
-	private String db = "/tiendatp";
+	private String db = "/TiendaBDDTP3";
 	private String port = "3306";
 	private String EngineDB = "mysql";
 	private String ip = "://localhost:";

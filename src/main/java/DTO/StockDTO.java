@@ -7,29 +7,29 @@ public class StockDTO implements GeneralDTO{
 	private float precio_compra;
 	private float precio_venta;
 	private int cant;
-	private boolean discontinuado;
+	private boolean descontinuado;
 	
 	public StockDTO() {
 		
 	}
 	
-	public StockDTO(String n, String d, float pc, float pv, int c, boolean disc) {
+	public StockDTO(String n, String d, float pc, float pv, int c, boolean desc) {
 		this.nombre = n;
 		this.descripcion = d;
 		this.precio_compra = pc;
 		this.precio_venta = pv;
 		this.cant = c;
-		this.discontinuado = disc;
+		this.descontinuado = desc;
 	}
 	
-	public StockDTO(int id, String n, String d, float pc, float pv, int c, boolean disc) {
+	public StockDTO(int id, String n, String d, float pc, float pv, int c, boolean desc) {
 		this.id = id;
 		this.nombre = n;
 		this.descripcion = d;
 		this.precio_compra = pc;
 		this.precio_venta = pv;
 		this.cant = c;
-		this.discontinuado = disc;
+		this.descontinuado = desc;
 	}
 
 	public int getId() {
@@ -81,11 +81,11 @@ public class StockDTO implements GeneralDTO{
 	}
 
 	public boolean isDiscontinuado() {
-		return discontinuado;
+		return descontinuado;
 	}
 
-	public void setDiscontinuado(boolean discontinuado) {
-		this.discontinuado = discontinuado;
+	public void setDiscontinuado(boolean descontinuado) {
+		this.descontinuado = descontinuado;
 	}
 
 	@Override
@@ -108,12 +108,12 @@ public class StockDTO implements GeneralDTO{
 	@Override
 	public String toString() {
 		return "StockDTO [id=" + id + ", "
-				+ "\n nombre =" + nombre +", "
-				+ "\n descripcion =" + descripcion +","
-				+ "\n precio_compra =" + precio_compra +","
-				+ "\n precio_venta =" + precio_venta +","
-				+ "\n cantidad =" + cant +","
-				+ "\n discontinuado =" + discontinuado +"]";
+				+ "\n NOMBRE =" + nombre +", "
+				+ "\n DESCRIPCION =" + descripcion +","
+				+ "\n PRECIO-COMPRA =" + precio_compra +","
+				+ "\n PRECIO-VENTA =" + precio_venta +","
+				+ "\n CANTIDAD =" + cant +","
+				+ "\n DESCONTINUADO =" + descontinuado +"]";
 	}
 	
 	
